@@ -137,7 +137,7 @@ export default function HeroSection({ onOpenReserve }) {
         <div
           className="relative w-[320px] sm:w-[350px] md:w-[380px] lg:w-[410px] h-[480px] sm:h-[510px] md:h-[540px] rounded-[32px] glass-portrait-frame flex flex-col justify-end items-center pb-8 z-10 transition-all duration-500 shadow-2xl cursor-grab active:cursor-grabbing"
           data-purpose="framed-perspective-view"
-          style={{ backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)' }}
+          style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
         >
           {/* Framed Image */}
           <div className="relative z-10 w-60 h-60 sm:w-68 sm:h-68 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/60 mb-5 group cursor-pointer backdrop-blur-sm">
