@@ -50,7 +50,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[0].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[0].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -71,7 +71,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[1].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[1].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -86,7 +86,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[2].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[2].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -124,7 +124,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[3].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[3].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -142,7 +142,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[4].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[4].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -157,7 +157,7 @@ export default function EditorialGallery() {
               >
                 <img
                   alt={GALLERY_IMAGES[5].alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500"
                   src={GALLERY_IMAGES[5].src}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">

@@ -12,7 +12,7 @@ import {
 const HERO_PERSPECTIVES = [
   {
     badge: 'Experience',
-    title: 'New Perspective',
+    title: 'Private Events',
     image: '/images/asset_01.png',
     alt: 'Stunning luxury tropical bohemian resort A-frame villa and pool',
     subtitle: 'Where tranquility meets architectural brilliance'
@@ -107,9 +107,8 @@ export default function HeroSection({ onOpenReserve }) {
             <img
               src={current.image}
               alt={current.alt}
-              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-                isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
-              }`}
+              className={`w-full h-full object-cover transition-all duration-700 ease-out ${isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
+                }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
           </div>
@@ -132,9 +131,8 @@ export default function HeroSection({ onOpenReserve }) {
               <button
                 key={idx}
                 onClick={() => setCurrentIdx(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentIdx === idx ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
-                }`}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${currentIdx === idx ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+                  }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
@@ -161,9 +159,8 @@ export default function HeroSection({ onOpenReserve }) {
             <a
               key={index}
               href={item.href}
-              className={`flex items-center justify-between px-3 md:px-5 ${
-                index < dockItems.length - 1 ? 'md:border-r border-white/20' : ''
-              } group cursor-pointer transition-transform hover:-translate-y-0.5`}
+              className={`flex items-center justify-between px-3 md:px-5 ${index < dockItems.length - 1 ? 'md:border-r border-white/20' : ''
+                } group cursor-pointer transition-transform hover:-translate-y-0.5`}
             >
               <div className="flex flex-col">
                 {item.icon}

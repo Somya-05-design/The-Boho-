@@ -98,7 +98,7 @@ export default function FeaturedServices({ onOpenReserve }) {
                     <div className="w-full h-48 rounded-2xl overflow-hidden mb-5 shadow-md relative group-hover:shadow-lg transition-all mt-1">
                       <img
                         alt={service.subtitle}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover transition-transform duration-500"
                         src={service.image}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
@@ -146,7 +146,7 @@ export default function FeaturedServices({ onOpenReserve }) {
                   <div className="w-full h-44 rounded-2xl overflow-hidden mb-5 shadow-sm relative group-hover:shadow-md transition-all">
                     <img
                       alt={service.subtitle}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover transition-transform duration-500"
                       src={service.image}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

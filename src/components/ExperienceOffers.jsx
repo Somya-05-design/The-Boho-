@@ -97,7 +97,7 @@ export default function ExperienceOffers({ onSelectOffer }) {
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
         {/* Header Title */}
-        <h2 className="font-serif text-[#221F1B] text-2xl sm:text-3xl md:text-[34px] font-normal tracking-wide text-center mb-14 md:mb-16">
+        <h2 className="font-serif text-[#221F1B] text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-normal tracking-wide text-center mb-14 md:mb-16">
           The Experience Offers
         </h2>
 

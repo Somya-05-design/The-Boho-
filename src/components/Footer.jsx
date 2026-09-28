@@ -78,7 +78,7 @@ export default function Footer() {
             >
               <img
                 alt={thumb.alt}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-cover transition-transform duration-300"
                 src={thumb.src}
               />
             </div>
