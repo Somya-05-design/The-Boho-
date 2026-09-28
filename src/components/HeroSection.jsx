@@ -107,7 +107,7 @@ export default function HeroSection({ onOpenReserve }) {
             <img
               src={current.image}
               alt={current.alt}
-              className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out ${
+              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
                 isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
               }`}
             />
