@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Navbar from './Navbar';
 import {
   FourPetalIcon,
@@ -44,6 +44,13 @@ export default function HeroSection({ onOpenReserve }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
+  const touchEndX = useRef(null);
+  const touchEndY = useRef(null);
+
+  const minSwipeDistance = 40;
+
   const handlePrev = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
@@ -56,6 +63,33 @@ export default function HeroSection({ onOpenReserve }) {
     setIsTransitioning(true);
     setCurrentIdx((prev) => (prev === HERO_PERSPECTIVES.length - 1 ? 0 : prev + 1));
     setTimeout(() => setIsTransitioning(false), 300);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
+    touchEndX.current = null;
+    touchEndY.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const deltaX = touchStartX.current - touchEndX.current;
+    const deltaY = touchStartY.current - touchEndY.current;
+
+    // Only trigger horizontal swipe if movement is predominantly horizontal and exceeds threshold
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
   };
 
   const current = HERO_PERSPECTIVES[currentIdx];
@@ -71,7 +105,7 @@ export default function HeroSection({ onOpenReserve }) {
   return (
     <main
       id="hero"
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-cover bg-center bg-no-repeat transition-all duration-700"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-cover bg-center bg-no-repeat transition-all duration-700 select-none"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.35)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZwrP8C01So0GK5Iq_6kuPdPL2DD7lggC7r27W5QSAGL87b0n-STWPqdkbf53RMIzvnTv2JsuWmwSuEHyPRf1NlR6eJFuSYfu4TQwssOs22TZSXsR8qWcbVIeifeaqjDp2XCj5lxEue75G8GFsZ6JDuSWAcWTIV-0QAbURQbZr5NwygvH0jktiTuiliFrACKciRk-WXC8wnLYhffD_InM1PqcTVTNtw93s80dIVnNeQSLH2nZB3FD-lxG_3DYU6DDzq6xacjznh4xIYg')`
       }}
@@ -81,8 +115,11 @@ export default function HeroSection({ onOpenReserve }) {
 
       {/* Center Interactive Frame Section */}
       <section
-        className="relative w-full flex-1 flex items-center justify-center my-4 py-6"
+        className="relative w-full flex-1 flex items-center justify-center my-4 py-6 touch-pan-y"
         data-purpose="hero-centerpiece"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Outer Slider Arrow Left */}
         <button
@@ -98,7 +135,7 @@ export default function HeroSection({ onOpenReserve }) {
 
         {/* Center Portrait Glass Frame */}
         <div
-          className="relative w-[320px] sm:w-[350px] md:w-[380px] lg:w-[410px] h-[480px] sm:h-[510px] md:h-[540px] rounded-[32px] glass-portrait-frame flex flex-col justify-end items-center pb-8 z-10 transition-all duration-500 shadow-2xl"
+          className="relative w-[320px] sm:w-[350px] md:w-[380px] lg:w-[410px] h-[480px] sm:h-[510px] md:h-[540px] rounded-[32px] glass-portrait-frame flex flex-col justify-end items-center pb-8 z-10 transition-all duration-500 shadow-2xl cursor-grab active:cursor-grabbing"
           data-purpose="framed-perspective-view"
           style={{ backdropFilter: 'blur(30px)', WebkitBackdropFilter: 'blur(30px)' }}
         >
@@ -107,8 +144,9 @@ export default function HeroSection({ onOpenReserve }) {
             <img
               src={current.image}
               alt={current.alt}
-              className={`w-full h-full object-cover transition-all duration-700 ease-out ${isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
-                }`}
+              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
+              }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
           </div>
@@ -131,8 +169,9 @@ export default function HeroSection({ onOpenReserve }) {
               <button
                 key={idx}
                 onClick={() => setCurrentIdx(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${currentIdx === idx ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
-                  }`}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentIdx === idx ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+                }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
@@ -153,22 +192,23 @@ export default function HeroSection({ onOpenReserve }) {
       </section>
 
       {/* Bottom Navigation Dock */}
-      <footer className="w-full dock-glass py-5 px-6 md:px-12 z-30" data-purpose="bottom-navigation-dock">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-0 items-center">
+      <footer className="w-full dock-glass py-4 sm:py-5 px-4 sm:px-6 md:px-12 z-30" data-purpose="bottom-navigation-dock">
+        <div className="max-w-7xl mx-auto flex md:grid md:grid-cols-5 gap-3 md:gap-0 items-center overflow-x-auto no-scrollbar snap-x snap-mandatory py-1">
           {dockItems.map((item, index) => (
             <a
               key={index}
               href={item.href}
-              className={`flex items-center justify-between px-3 md:px-5 ${index < dockItems.length - 1 ? 'md:border-r border-white/20' : ''
-                } group cursor-pointer transition-transform hover:-translate-y-0.5`}
+              className={`flex-shrink-0 min-w-[190px] md:min-w-0 snap-center flex items-center justify-between px-4 md:px-5 py-2 md:py-0 ${
+                index < dockItems.length - 1 ? 'md:border-r border-white/20' : ''
+              } group cursor-pointer transition-transform hover:-translate-y-0.5 rounded-2xl md:rounded-none bg-white/10 md:bg-transparent border border-white/15 md:border-none backdrop-blur-sm md:backdrop-blur-none shadow-sm md:shadow-none`}
             >
               <div className="flex flex-col">
                 {item.icon}
-                <span className="text-[11px] md:text-[12px] font-normal tracking-[0.12em] text-white/90 group-hover:text-white transition-colors uppercase">
+                <span className="text-[11px] md:text-[12px] font-normal tracking-[0.12em] text-white/90 group-hover:text-white transition-colors uppercase whitespace-nowrap">
                   {item.label}
                 </span>
               </div>
-              <span className="w-7 h-7 rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-all ml-2 group-hover:bg-white/10">
+              <span className="w-7 h-7 rounded-full border border-white/40 flex items-center justify-center text-white/80 group-hover:border-white group-hover:text-white transition-all ml-2 group-hover:bg-white/10 flex-shrink-0">
                 <ArrowDiagonal className="w-3.5 h-3.5 stroke-[1.4]" />
               </span>
             </a>
